@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="1" author="supersonicleader@gmail.com">
+        <createTable tableName="item">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(40)"/>
+            <column name="description" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="supersonicleader@gmail.com">
+        <createTable tableName="item_details">
+            <column name="item_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="item_id" references="item(id)"/>
+            </column>
+            <column name="price" type="DECIMAL(5,2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="supersonicleader@gmail.com">
+        <createTable tableName="shop">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(40)"/>
+            <column name="location" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="supersonicleader@gmail.com">
+        <createTable tableName="item_shop">
+            <column name="item_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="false" foreignKeyName="fk_item_id" references="item(id)"/>
+            </column>
+            <column name="shop_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="false" foreignKeyName="fk_shop_id" references="shop(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
